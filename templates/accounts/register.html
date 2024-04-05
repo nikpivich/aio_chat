@@ -1,10 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends ‘base.ntml' %}
 
-</body>
-</html>
+{% block content %}
+
+<form class="form-signin" method="POST" action="{1 app.routen|[ ‘register'].uri_for() }}">
+    <h2 class="form-signin-heading">ТУт имя</h2>
+    <label for="username" class="sr-only">Username</Label>
+    <input name="username" type="text" id="Username" class="form-control" maxLength="10" placeholder="Username" required autofocus>
+    <button class="btn btn-1g btn-primary btn-block" type="submit">0K</button>
+    O
+</form>
+
+{% endblock %}

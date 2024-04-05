@@ -1,9 +1,39 @@
+import datetime
 import time
 
 from aiohttp import web
 import aiohttp_jinja2
 from helpers.decorators import anonymous_required, login_required
 from helpers.tools import redirect
+
+class LogIn(web.View):
+    pass
+
+    # @aiohttp_jinja2.template("users/login.html")
+    # async def get(self):
+    #     return {}
+    #
+    # async def post(self):
+    #     data = await self.request.post()
+    #     username = data.get('username', '').lower()
+    #
+    #     try:
+    #         user = await User.get(username=username)
+    #     except Exception as error:
+    #         print(error)
+    #         redirect(self.request, "login")
+    #         return
+    #
+    #     else:
+    #         self.login(user)
+    #     return web.json_response({"user": user.id})
+    #
+    # def login(self, user: User):
+    #
+    #     self.request.session["user_id"] = user.id
+    #     self.request.session["time"] = str(datetime.datetime.now())
+    #
+    #     redirect(self.request, "home")
 
 class Register(web.View):
 
@@ -14,18 +44,18 @@ class Register(web.View):
         pass
 
     @anonymous_required
-    def post(self):
+    async def post(self):
         username = await self.is_valid()
         if not username or self.request.app.users.get(username, None):
             redirect(self.request, 'register')
 
-        self.request.app[username] = {
+        self.request.app.users[username] = {
             'active': True
         }
 
-        self.login()
+        self.login(username)
 
-    def is_valid(self):
+    async def is_valid(self):
         '''Проверяем имя пользователя'''
 
         data = await self.request.post()
@@ -46,7 +76,7 @@ class Logout(web.View):
 
     @login_required
     async def get(self):
-        self.request.app.pop(
+        self.request.app.users.pop(
             self.request.session.pop('user', None),
             None
         )

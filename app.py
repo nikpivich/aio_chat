@@ -41,7 +41,7 @@ if __name__ == '__main__':
     app.router.add_routes(acc_routes)
     app.router.add_routes(chat_routes)
 
-    app.router.add_static('static/', BASE_DIR / 'static', name='static')
+    app.router.add_static('/static/', BASE_DIR / 'static', name='static')
 
     web.run_app(app, host=HOST, port=PORT)
 
