@@ -23,13 +23,13 @@
     <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
     <div class="menu-list">
         <ul id="menu-content" class="menu-content collapse out">
-            <li{% if request.match_info._route.name == 'index' %} class="collapsed active"{% endif %}>
+            <li>{% if request.match_info._route.name == 'index' %} class="collapsed active"{% endif %}>
                 <a href="{{ app.router['insex'].url_for() }}">
                     <i class="fa fa-home fa-lg"></i> Main page
                 </a>
             </li>
             {% if request.user %}
-                <li{% if request.match_info._route.name == 'logout' %} class="collapsed active"{% endif %}>
+                <li>{% if request.match_info._route.name == 'logout' %} class="collapsed active"{% endif %}>
                     <a href="{{ app.router['logout'].url_for() }}">
                         <i class="fa fa-sign-out fa-lg"></i> LogOut from {{ request.user }}
                     </a>
@@ -38,19 +38,19 @@
                     <a><i class="fa fa-weixin fa-lg"></i> Chat rooms <span class="arrow"></span></a>
                 </li>
                 <ul class="sub-menu collapse{% if request.path.startswith('/chat') %} in{% endif %}" id="rooms">
-                    <li{% if request.match_info._route.name == 'create_room' %} class="active"{% endif %}>
+                    <li>{% if request.match_info._route.name == 'create_room' %} class="active"{% endif %}>
                         <a href="{{ app.router['create_room'].url_for() }}">Create new room</a></li>
 
 
                     {% for room in chat_rooms %}
-                        <li{% if request.match_info._route.name == 'room' and request.match_info['name'] == room.name %} class="active"{% endif %}>
+                        <li>{% if request.match_info._route.name == 'room' and request.match_info['name'] == room.name %} class="active"{% endif %}>
                             <a href="{{ app.router['room'].url_for(name=room.name) }}">#{{ room.name }}</a></li>
                     {% endfor %}
 
 
                 </ul>
             {% else %}
-                <li{% if request.match_info._route.name == 'login' %} class="collapsed active"{% endif %}>
+                <li>{% if request.match_info._route.name == 'login' %} class="collapsed active"{% endif %}>
                     <a href="{{ app.router['login'].url_for() }}">
                         <i class="fa fa-sign-in fa-lg"></i> LogIn
                     </a>

@@ -8,7 +8,7 @@ from helpers.tools import redirect
 
 class LogIn(web.View):
     pass
-
+    # Набросок для подключения базы данных
     # @aiohttp_jinja2.template("users/login.html")
     # async def get(self):
     #     return {}
